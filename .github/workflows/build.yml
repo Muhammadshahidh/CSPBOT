@@ -32,15 +32,15 @@ jobs:
           cd android/app
           keytool -genkeypair -v -keystore debug.keystore -storepass android -alias androiddebugkey -keypass android -keyalg RSA -keysize 2048 -validity 10000 -dname "CN=Android Debug,O=Android,C=US"
 
-      - name: Build Android APK
+      - name: Build Release APK
         run: |
           cd android
           chmod +x gradlew
-          ./gradlew assembleDebug
+          ./gradlew assembleRelease
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: CSPBOT-Debug-APK
-          path: android/app/build/outputs/apk/debug/*.apk
+          name: CSPBOT-Release-APK
+          path: android/app/build/outputs/apk/release/*.apk
           if-no-files-found: error
